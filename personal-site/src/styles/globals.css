@@ -5,32 +5,33 @@
 :root {
   --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
   --font-sans: 'Inter', system-ui, sans-serif;
-  --color-bg:           #080808;
-  --color-ink-primary:  #d4d4d4;
-  --color-ink-secondary:#888888;
-  --color-ink-muted:    #555555;
-  --color-ink-dim:      #2d2d2d;
-  --color-border:       #1a1a1a;
-  --color-border-hover: #2a2a2a;
-  --color-green:        #4ade80;
-  --color-blue:         #60a5fa;
-  --color-amber:        #f59e0b;
-  --color-purple:       #a78bfa;
 }
 
-* { box-sizing: border-box; cursor: none !important; }
+/* Override Tailwind base reset — this is the fix for invisible text */
+*, *::before, *::after {
+  box-sizing: border-box;
+  cursor: none !important;
+}
 
-html, body {
-  background: #080808;
-  color: #d4d4d4;
+html {
+  background: #080808 !important;
+  color: #d4d4d4 !important;
+}
+
+body {
+  background: #080808 !important;
+  color: #d4d4d4 !important;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Ensure all text is visible */
-p, span, div, h1, h2, h3, h4, h5, h6, a, li, label {
+/* Force all text elements to inherit so they pick up body color */
+p, span, h1, h2, h3, h4, h5, h6, a, li, label, button, input, textarea, div {
   color: inherit;
 }
+
+/* Re-assert common dim colors used throughout */
+[style*="color: #"] { /* inline styles win — leave them alone */ }
 
 ::selection { background: rgba(74,222,128,0.15); color: #fff; }
 
@@ -60,7 +61,7 @@ p, span, div, h1, h2, h3, h4, h5, h6, a, li, label {
 
 /* Now card */
 .now-card { transition: border-color 0.2s, background 0.2s; }
-.now-card:hover { border-color: #1f1f1f; background: #0d0d0d; }
+.now-card:hover { border-color: #1f1f1f !important; background: #0d0d0d !important; }
 
 /* Footer link underline */
 .footer-link { position: relative; }

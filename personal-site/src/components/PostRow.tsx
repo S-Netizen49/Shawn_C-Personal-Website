@@ -1,48 +1,47 @@
 import Link from 'next/link'
 import type { Post } from '@/lib/types'
 
-const TAG_STYLES: Record<string, string> = {
-  'deep-dive':  'text-accent-blue  border-accent-blue/25  bg-accent-blue/5',
-  'tutorial':   'text-accent-green border-accent-green/25 bg-accent-green/5',
-  'essay':      'text-text-muted   border-border          bg-bg-surface',
-  'photos':     'text-accent-amber border-accent-amber/25 bg-accent-amber/5',
-  'case-study': 'text-accent-purple border-accent-purple/25 bg-accent-purple/5',
-}
-
-const HOVER_COLORS: Record<string, string> = {
-  'deep-dive':  'group-hover:text-accent-blue',
-  'tutorial':   'group-hover:text-accent-green',
-  'essay':      'group-hover:text-white',
-  'photos':     'group-hover:text-accent-amber',
-  'case-study': 'group-hover:text-accent-purple',
+const TAG_COLORS: Record<string, string> = {
+  'deep-dive':  '#60a5fa',
+  'tutorial':   '#4ade80',
+  'essay':      '#aaa',
+  'photos':     '#f59e0b',
+  'case-study': '#a78bfa',
 }
 
 export default function PostRow({ post }: { post: Post }) {
-  const hoverColor = HOVER_COLORS[post.type] ?? 'group-hover:text-white'
+  const tagColor = TAG_COLORS[post.type] ?? '#aaa'
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="post-row group grid grid-cols-[1fr_auto] items-start gap-4 py-4 border-b border-border px-7 -mx-7 transition-colors hover:bg-[#0b0b0b]"
+      className="post-row"
+      style={{
+        display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'start',
+        gap: '16px', padding: '14px 0', borderBottom: '1px solid rgba(255,255,255,0.06)',
+        textDecoration: 'none', transition: 'background 0.15s',
+      }}
     >
-      <div className="flex flex-col gap-1.5 pl-7">
-        <div className="flex gap-1.5 flex-wrap">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
           {post.tags.slice(0, 2).map(tag => (
-            <span
-              key={tag}
-              className={`font-mono text-[9px] px-2 py-0.5 rounded border tracking-widest uppercase transition-all duration-200 ${TAG_STYLES[post.type] ?? TAG_STYLES.essay}`}
-            >
+            <span key={tag} style={{
+              fontFamily: 'monospace', fontSize: '9px', padding: '2px 8px',
+              border: `1px solid ${tagColor}33`, borderRadius: '3px',
+              color: tagColor, background: `${tagColor}0d`,
+              letterSpacing: '0.1em', textTransform: 'uppercase',
+            }}>
               {tag}
             </span>
           ))}
         </div>
-        <span className={`font-mono text-sm text-text-secondary transition-colors duration-200 leading-snug ${hoverColor}`}>
+        <span style={{ fontFamily: 'monospace', fontSize: '14px', color: '#ccc', lineHeight: 1.4 }}>
           {post.title}
         </span>
-        <span className="font-mono text-[10px] text-text-dim tracking-wide">
+        <span style={{ fontFamily: 'monospace', fontSize: '10px', color: '#555', letterSpacing: '0.08em' }}>
           {new Date(post.published_at).getFullYear()} — {post.reading_time} min
         </span>
       </div>
-      <span className={`font-mono text-sm text-text-dim transition-all duration-200 mt-0.5 group-hover:translate-x-1 group-hover:-translate-y-1 ${hoverColor}`}>↗</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '14px', color: '#555', marginTop: '2px' }}>↗</span>
     </Link>
   )
 }
