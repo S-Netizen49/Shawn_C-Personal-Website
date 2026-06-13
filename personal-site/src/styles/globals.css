@@ -5,37 +5,70 @@
 :root {
   --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
   --font-sans: 'Inter', system-ui, sans-serif;
+  --color-bg:           #080808;
+  --color-ink-primary:  #d4d4d4;
+  --color-ink-secondary:#888888;
+  --color-ink-muted:    #555555;
+  --color-ink-dim:      #2d2d2d;
+  --color-border:       #1a1a1a;
+  --color-border-hover: #2a2a2a;
+  --color-green:        #4ade80;
+  --color-blue:         #60a5fa;
+  --color-amber:        #f59e0b;
+  --color-purple:       #a78bfa;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; cursor: none !important; }
 
-html {
+html, body {
   background: #080808;
   color: #d4d4d4;
-}
-
-body {
-  background: #080808;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
-::selection {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+/* Ensure all text is visible */
+p, span, div, h1, h2, h3, h4, h5, h6, a, li, label {
+  color: inherit;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
+::selection { background: rgba(74,222,128,0.15); color: #fff; }
+
+::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: #080808; }
-::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #333; }
+::-webkit-scrollbar-thumb { background: #1f1f1f; border-radius: 2px; }
 
-/* Code highlighting overrides */
+/* Nav underline */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: ''; position: absolute;
+  bottom: -2px; left: 0; width: 0; height: 1px;
+  background: #4ade80; transition: width 0.25s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* Post row left bar */
+.post-row { position: relative; }
+.post-row::before {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0; width: 2px;
+  background: #4ade80;
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+}
+.post-row:hover::before { transform: scaleY(1); }
+
+/* Now card */
+.now-card { transition: border-color 0.2s, background 0.2s; }
+.now-card:hover { border-color: #1f1f1f; background: #0d0d0d; }
+
+/* Footer link underline */
+.footer-link { position: relative; }
+.footer-link::after {
+  content: ''; position: absolute;
+  bottom: -1px; left: 0; width: 0; height: 1px;
+  background: #888; transition: width 0.2s;
+}
+.footer-link:hover::after { width: 100%; }
+
 .hljs { background: transparent !important; }
-
-/* Page transition */
-.page-enter { opacity: 0; transform: translateY(8px); }
-.page-enter-active { opacity: 1; transform: translateY(0); transition: all 0.3s ease; }

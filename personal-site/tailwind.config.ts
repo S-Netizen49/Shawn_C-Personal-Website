@@ -18,16 +18,17 @@ const config: Config = {
           DEFAULT: '#1a1a1a',
           hover: '#2a2a2a',
         },
-        text: {
-          primary: '#d4d4d4',
+        // renamed from 'text' to 'ink' to avoid Tailwind namespace conflict
+        ink: {
+          primary:   '#d4d4d4',
           secondary: '#888888',
-          muted: '#444444',
-          dim: '#2d2d2d',
+          muted:     '#555555',
+          dim:       '#2d2d2d',
         },
         accent: {
-          green: '#4ade80',
-          blue: '#60a5fa',
-          amber: '#f59e0b',
+          green:  '#4ade80',
+          blue:   '#60a5fa',
+          amber:  '#f59e0b',
           purple: '#a78bfa',
         },
       },
@@ -42,7 +43,7 @@ const config: Config = {
             strong: { color: '#d4d4d4', fontWeight: '500' },
             code: { color: '#4ade80', background: '#111', padding: '2px 6px', borderRadius: '4px', fontSize: '0.875em' },
             'code::before': { content: 'none' },
-            'code::after': { content: 'none' },
+            'code::after':  { content: 'none' },
             pre: { background: '#0d0d0d', border: '1px solid #1a1a1a' },
             blockquote: { borderLeftColor: '#2a2a2a', color: '#666' },
             hr: { borderColor: '#1a1a1a' },
