@@ -5,6 +5,7 @@ import PostRow from '@/components/PostRow'
 import ProjectCard from '@/components/ProjectCard'
 import StaticProjectCard from '@/components/StaticProjectCard'
 import ExperienceTeaser from '@/components/ExperienceTeaser'
+import PersonalTeaser from '@/components/PersonalTeaser'
 import { getPosts, getProjects } from '@/lib/data'
 import { Suspense } from 'react'
 
@@ -113,6 +114,10 @@ export default async function Home() {
           {/* Experience teaser */}
           <section style={{ padding: '40px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
             <ExperienceTeaser />
+          </section>
+          {/* Personal */}
+          <section style={{ padding: '40px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+            <PersonalTeaser />
           </section>
 
           {/* Now */}
