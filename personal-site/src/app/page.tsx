@@ -3,26 +3,43 @@ import HeroName from '@/components/HeroName'
 import Ticker from '@/components/Ticker'
 import PostRow from '@/components/PostRow'
 import ProjectCard from '@/components/ProjectCard'
+import StaticProjectCard from '@/components/StaticProjectCard'
+import ExperienceTeaser from '@/components/ExperienceTeaser'
 import { getPosts, getProjects } from '@/lib/data'
 import { Suspense } from 'react'
 
-const YOUR_NAME = 'Your Name'
-const YOUR_CITY = 'Montréal'
 const NOW = [
-  { label: 'status',   value: 'available for work',                            live: true,  color: '#4ade80' },
-  { label: 'building', value: 'this site + a new open source tool',            live: false, color: '#60a5fa' },
-  { label: 'reading',  value: 'Structure & Interpretation of Computer Programs',live: false, color: '#a78bfa' },
+  { label: 'status',   value: 'open to opportunities',              live: true,  color: '#4ade80' },
+  { label: 'building', value: 'Touristy — iOS travel planning app', live: false, color: '#60a5fa' },
+  { label: 'studying', value: 'B.Sc. Computer Science, Concordia',  live: false, color: '#a78bfa' },
 ]
 const SOCIAL = [
-  { label: 'github',  href: 'https://github.com/yourhandle' },
-  { label: 'twitter', href: 'https://twitter.com/yourhandle' },
-  { label: 'rss',     href: '/rss.xml' },
-  { label: 'email',   href: 'mailto:you@example.com' },
+  { label: 'github',   href: 'https://github.com/S-Netizen49' },
+  { label: 'linkedin', href: 'https://www.linkedin.com/in/shawnn-cui/' },
+  { label: 'email',    href: 'mailto:zhzhang2002@gmail.com' },
+]
+const STATIC_PROJECTS = [
+  {
+    name: 'Touristy',
+    desc: 'Full-stack iOS travel planning app with trip optimizer, real-time weather, and Google Maps integration.',
+    stack: ['React Native', 'Spring Boot', 'PostgreSQL', 'Google APIs'],
+    glyph: '✈',
+    color: '#60a5fa',
+    href: 'https://github.com/S-Netizen49',
+  },
+  {
+    name: 'YTMusic Sorter',
+    desc: 'Chrome extension with AI agent that auto-categorizes YouTube Music liked songs by genre, mood, or decade.',
+    stack: ['JavaScript', 'Chrome Extension', 'Gemini', 'Ollama'],
+    glyph: '♪',
+    color: '#f59e0b',
+    href: 'https://github.com/S-Netizen49',
+  },
 ]
 
-const LABEL = {
+const LABEL: React.CSSProperties = {
   fontFamily: 'monospace', fontSize: '9px', color: '#666',
-  letterSpacing: '0.22em', textTransform: 'uppercase' as const,
+  letterSpacing: '0.22em', textTransform: 'uppercase',
   marginBottom: '20px', marginTop: 0,
 }
 
@@ -32,7 +49,6 @@ export default async function Home() {
   return (
     <>
       <ParticleCanvas />
-
       <div style={{ position: 'relative', zIndex: 1 }}>
 
         {/* ── HERO ── */}
@@ -47,12 +63,16 @@ export default async function Home() {
           }} />
           <div style={{ position: 'relative' }}>
             <p style={{ fontFamily: 'monospace', fontSize: '11px', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '16px', marginTop: 0 }}>
-              software engineer &amp; writer
+              software engineer · montreal, qc
             </p>
-            <HeroName name={YOUR_NAME} />
-            <p style={{ fontFamily: 'monospace', fontSize: '14px', color: '#aaa', lineHeight: 1.8, maxWidth: '400px', marginTop: '12px', marginBottom: 0 }}>
-              Building things, <span style={{ color: '#ddd' }}>writing about them</span>, breaking them,
-              {' '}writing about that too. Based in <span style={{ color: '#4ade80' }}>{YOUR_CITY}</span>.
+            <HeroName name="Shawn Cui" />
+            <p style={{ fontFamily: 'monospace', fontSize: '14px', color: '#aaa', lineHeight: 1.8, maxWidth: '480px', marginTop: '14px', marginBottom: 0 }}>
+              Full-stack engineer with a taste for{' '}
+              <span style={{ color: '#ddd' }}>distributed systems</span> and{' '}
+              <span style={{ color: '#ddd' }}>mobile apps</span>. CS graduate from{' '}
+              <span style={{ color: '#4ade80' }}>Concordia</span>. Previously at{' '}
+              <span style={{ color: '#60a5fa' }}>Genetec</span> &amp;{' '}
+              <span style={{ color: '#a78bfa' }}>Consoltec</span>.
             </p>
           </div>
         </section>
@@ -72,7 +92,7 @@ export default async function Home() {
             <Suspense fallback={<p style={{ fontFamily: 'monospace', fontSize: '12px', color: '#666', margin: 0 }}>loading...</p>}>
               {posts.length === 0
                 ? <p style={{ fontFamily: 'monospace', fontSize: '13px', color: '#777', margin: 0 }}>
-                    No posts yet — add them in Supabase or visit <span style={{ color: '#aaa' }}>/admin</span>.
+                    No posts yet — visit <span style={{ color: '#aaa' }}>/admin</span> to write your first one.
                   </p>
                 : posts.map(p => <PostRow key={p.id} post={p} />)
               }
@@ -82,14 +102,17 @@ export default async function Home() {
           {/* Projects */}
           <section style={{ padding: '40px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
             <p style={LABEL}>selected projects</p>
-            {projects.length === 0
-              ? <p style={{ fontFamily: 'monospace', fontSize: '13px', color: '#777', margin: 0 }}>
-                  No projects yet — add them in Supabase.
-                </p>
-              : <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                  {projects.map(p => <ProjectCard key={p.id} project={p} />)}
-                </div>
-            }
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+              {projects.length > 0
+                ? projects.map(p => <ProjectCard key={p.id} project={p} />)
+                : STATIC_PROJECTS.map(p => <StaticProjectCard key={p.name} {...p} />)
+              }
+            </div>
+          </section>
+
+          {/* Experience teaser */}
+          <section style={{ padding: '40px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+            <ExperienceTeaser />
           </section>
 
           {/* Now */}
@@ -102,9 +125,7 @@ export default async function Home() {
                     {card.label}
                   </p>
                   <p style={{ fontFamily: 'monospace', fontSize: '13px', color: '#bbb', lineHeight: 1.6, margin: 0 }}>
-                    {card.live && (
-                      <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: card.color, marginRight: '7px', verticalAlign: 'middle' }} />
-                    )}
+                    {card.live && <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: card.color, marginRight: '7px', verticalAlign: 'middle' }} />}
                     {card.value}
                   </p>
                 </div>
@@ -114,7 +135,7 @@ export default async function Home() {
 
           {/* Footer */}
           <footer style={{ padding: '20px 40px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontFamily: 'monospace', fontSize: '11px', color: '#555' }}>© {new Date().getFullYear()}</span>
+            <span style={{ fontFamily: 'monospace', fontSize: '11px', color: '#555' }}>© {new Date().getFullYear()} Shawn Cui</span>
             <div style={{ display: 'flex', gap: '24px' }}>
               {SOCIAL.map(l => (
                 <a key={l.label} href={l.href} className="footer-link"

@@ -4,16 +4,16 @@ import Nav from '@/components/Nav'
 import Cursor from '@/components/Cursor'
 
 export const metadata: Metadata = {
-  title: { default: 'Your Name', template: '%s — Your Name' },
-  description: 'Building things, writing about them. Software engineer based in Montréal.',
-  openGraph: { type: 'website', locale: 'en_CA', url: process.env.NEXT_PUBLIC_SITE_URL, siteName: 'Your Name' },
-  twitter: { card: 'summary_large_image', creator: '@yourhandle' },
+  title: { default: 'Shawn Cui', template: '%s — Shawn Cui' },
+  description: 'Full-stack software engineer based in Montréal. Previously at Genetec and Consoltec.',
+  openGraph: { type: 'website', locale: 'en_CA', siteName: 'Shawn Cui' },
+  twitter: { card: 'summary_large_image', creator: '@shawncui' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ background: '#080808', color: '#d4d4d4', cursor: 'none', margin: 0 }}>
+      <body style={{ background: '#03030a', color: '#d4d4d4', cursor: 'none', margin: 0, minHeight: '100vh', WebkitFontSmoothing: 'antialiased' } as React.CSSProperties}>
         <Cursor />
         <Nav />
         <main>{children}</main>

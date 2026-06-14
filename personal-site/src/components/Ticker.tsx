@@ -2,18 +2,18 @@
 import { useState } from 'react'
 
 const ITEMS = [
-  { label: 'next.js',        color: '#fff'    },
-  { label: 'supabase',       color: '#4ade80' },
+  { label: 'react native',   color: '#60a5fa' },
+  { label: 'spring boot',    color: '#4ade80' },
   { label: 'typescript',     color: '#60a5fa' },
-  { label: 'systems design', color: '#a78bfa' },
-  { label: 'open source',    color: '#4ade80' },
-  { label: 'montréal',       color: '#f59e0b' },
-  { label: 'rust',           color: '#f97316' },
-  { label: 'photography',    color: '#ec4899' },
-  { label: 'framer motion',  color: '#a78bfa' },
-  { label: 'local-first',    color: '#60a5fa' },
-  { label: 'mdx',            color: '#4ade80' },
-  { label: 'tailwind',       color: '#38bdf8' },
+  { label: 'c#',             color: '#a78bfa' },
+  { label: 'postgresql',     color: '#38bdf8' },
+  { label: 'aws',            color: '#f59e0b' },
+  { label: 'angularjs',      color: '#ec4899' },
+  { label: 'java',           color: '#f97316' },
+  { label: 'distributed systems', color: '#a78bfa' },
+  { label: 'montreal',       color: '#4ade80' },
+  { label: 'microservices',  color: '#60a5fa' },
+  { label: 'concordia',      color: '#f59e0b' },
 ]
 
 function Item({ label, color }: { label: string; color: string }) {
@@ -30,11 +30,7 @@ function Item({ label, color }: { label: string; color: string }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <span style={{
-        width: '4px', height: '4px', borderRadius: '50%', display: 'inline-block',
-        background: hovered ? color : '#444',
-        transition: 'background 0.15s',
-      }} />
+      <span style={{ width: '4px', height: '4px', borderRadius: '50%', display: 'inline-block', background: hovered ? color : '#444', transition: 'background 0.15s' }} />
       {label}
     </span>
   )
